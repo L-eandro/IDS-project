@@ -19,11 +19,14 @@ http_requests_total = Counter('http_requests_total', 'Número total de requisiç
 response_duration_seconds = Gauge('http_response_duration_seconds', 'Duração da resposta HTTP em segundos')
 data_gauge = Gauge('website_data_metric', 'Descrição da métrica de dados do site')
 
+# Nova métrica para tentativas de acesso
+access_attempts = Counter('access_attempts_total', 'Número total de tentativas de acesso', ['ip_address'])
+
 # Função para coletar dados de uma API externa
 def fetch_external_data():
     try:
         # URL da API para recuperar dados específicos (ajuste conforme necessário)
-        url = "ttps://www.virustotal.com/api/v3/urls/{id}"  # Substitua pelo endpoint correto
+        url = "https://www.virustotal.com/api/v3/urls/"  # Substitua pelo endpoint correto
         
         # Faz a requisição HTTP para a API
         start_time = time.time()
@@ -33,11 +36,23 @@ def fetch_external_data():
         # Atualiza as métricas do Prometheus
         http_requests_total.inc()
         response_duration_seconds.set(response_duration)
-        data_gauge.set(data)
+        access_attempts.inc()
 
         # Processa a resposta da API
         if response.status_code == 200:
             data = response.json()
+           # Supondo que o IP esteja nos cabeçalhos da resposta (ou ajuste conforme necessário)
+            ip_address = response.headers.get('X-Forwarded-For', response.headers.get('Remote-Addr', 'Unknown'))
+
+            # Incrementa o contador para o IP específico
+            access_attempts.labels(ip_address=ip_address).inc()
+
+            # Atualiza a métrica data_gauge com base nos dados retornados
+            data_gauge.set(len(data))  # Exemplo de métrica, ajuste conforme necessário
+
+            
+            logger.info(f"Dados recuperados com sucesso: {data}")
+            
             # Adicione lógica para processar os dados conforme necessário
             logger.info(f"Dados recuperados com sucesso: {data}")
 
