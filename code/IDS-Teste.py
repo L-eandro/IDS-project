@@ -7,6 +7,8 @@ from scapy.all import sniff
 from scapy.layers.inet import ICMP, TCP
 from prometheus_client import start_http_server, Counter, Gauge
 from statsmodels.tsa.arima.model import ARIMA
+from server_status import check_server
+from time_server import update_execution_time
 
 # Configuração do SysLogHandler para enviar logs ao syslog (substitua localhost pelo endereço correto)
 syslog_handler = SysLogHandler(address=('localhost', 514))
@@ -116,6 +118,10 @@ def main():
     historical_data = collect_historical_data()
     if not historical_data.empty:
         analyze_and_predict(historical_data)
+
+    # Verificação do status do servidor usando a função importada
+    check_server()
+    update_execution_time()
 
     # Inicia a captura de pacotes na interface de rede especificada
     sniff(iface="Wi-Fi 2", prn=packet_callback, store=0)
