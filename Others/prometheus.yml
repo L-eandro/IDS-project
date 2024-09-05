@@ -19,14 +19,36 @@ rule_files:
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: "prometheus"
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
   - job_name: 'http_requests_total'
     static_configs:
-      - targets: ['localhost:8000'] # Substitua por sua porta se necessário
+      - targets: ['localhost:8000']
 
   - job_name: 'http_response_duration_seconds'
     static_configs:
-      - targets: ['localhost:8000'] # Substitua por sua porta se necessário
+      - targets: ['localhost:8000']
 
-  - job_name: 'website_data_metric'
+  - job_name: 'intrusion_icmp_total'
     static_configs:
-      - targets: ['localhost:8000'] # Substitua por sua porta se necessário
+      - targets: ['localhost:8000']
+
+  - job_name: 'intrusion_tcp_total'
+    static_configs:
+      - targets: ['localhost:8000']
+
+  - job_name: 'attack_prediction_alert'
+    static_configs:
+      - targets: ['localhost:8000']
+
+  - job_name: 'server_status'
+    static_configs:
+    - targets: ['localhost:8000']
+
+  - job_name: 'server_uptime_seconds'
+    static_configs:
+    - targets: [ 'localhost:8000' ]
