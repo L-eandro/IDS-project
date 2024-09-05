@@ -46,4 +46,4 @@ Este projeto é uma solução integrada para monitoramento de rede, previsão de
   - `logging`
 - Servidor Syslog para receber os logs.
 - Servidor Prometheus para coletar as métricas.
-
+- Ferramenta de visualização Grafana
