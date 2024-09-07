@@ -4,6 +4,9 @@ from attack_prediction import analyze_and_predict
 from packet_analysis import start_packet_sniffing
 from server_status import check_server
 from time_server import update_execution_time
+from monitor_network import monitor_network
+from monitor_ports import collect_port_data
+from intrusion_detect import simulate_intrusion_detection
 import time
 
 def main():
@@ -14,14 +17,23 @@ def main():
         analyze_and_predict(historical_data)
 
     check_server()
+
     update_execution_time()
 
+    monitor_network()
+
+    collect_port_data()
 
     start_packet_sniffing()
+
+    simulate_intrusion_detection()
 
 
     while True:
         fetch_external_data()
+        collect_port_data()
+        monitor_network()
+        simulate_intrusion_detection()
         time.sleep(60)
 
 if __name__ == "__main__":
