@@ -7,7 +7,7 @@ from time_server import update_execution_time
 from monitor_network import monitor_network
 from monitor_ports import collect_port_data
 from intrusion_detect import simulate_intrusion_detection
-from maps_attack import random_attack
+
 
 import time
 
@@ -33,7 +33,7 @@ def main():
         collect_port_data()
         monitor_network()
         simulate_intrusion_detection()
-        random_attack()
+
 
         time.sleep(60)
 

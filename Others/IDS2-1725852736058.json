@@ -118,6 +118,11 @@
       },
       "id": 10,
       "options": {
+        "basemap": {
+          "config": {},
+          "name": "Layer 0",
+          "type": "default"
+        },
         "controls": {
           "mouseWheelZoom": true,
           "showAttribution": true,
@@ -136,15 +141,17 @@
                 },
                 "opacity": 0.4,
                 "rotation": {
+                  "field": "{__name__=\"attack_count\", country=\"Romania\", instance=\"localhost:8000\", ip=\"198.51.100.14\", job=\"attack_prediction_alert\"}",
                   "fixed": 0,
                   "max": 360,
                   "min": -360,
                   "mode": "mod"
                 },
                 "size": {
-                  "fixed": 5,
+                  "field": "{__name__=\"attack_count\", country=\"Romania\", instance=\"localhost:8000\", ip=\"198.51.100.14\", job=\"attack_prediction_alert\"}",
+                  "fixed": 15,
                   "max": 15,
-                  "min": 2
+                  "min": 1
                 },
                 "symbol": {
                   "fixed": "img/icons/marker/circle.svg",
@@ -164,7 +171,9 @@
               }
             },
             "location": {
-              "mode": "auto"
+              "latitude": "{__name__=\"attack_count\", country=\"Romania\", instance=\"localhost:8000\", ip=\"198.51.100.14\", job=\"attack_prediction_alert\"}",
+              "longitude": "{__name__=\"attack_count\", country=\"Romania\", instance=\"localhost:8000\", ip=\"198.51.100.14\", job=\"attack_prediction_alert\"}",
+              "mode": "coords"
             },
             "name": "Layer 1",
             "tooltip": true,
@@ -191,7 +200,8 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "map_attack_generated_total{country=\"Brazil\"}",
+          "exemplar": false,
+          "expr": "attack_count{instance=\"localhost:8000\"}",
           "format": "heatmap",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -202,7 +212,7 @@
           "useBackend": false
         }
       ],
-      "title": "Panel Title",
+      "title": "Geolocation",
       "type": "geomap"
     },
     {
@@ -986,8 +996,8 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "IDS",
-  "uid": "adwxu0zjwsagwc",
+  "title": "IDS2",
+  "uid": "adwxu0zjwsagwcsd",
   "version": 2,
   "weekStart": ""
 }

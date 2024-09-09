@@ -72,3 +72,7 @@ scrape_configs:
   - job_name: 'attack_simulation'
     static_configs:
       - targets: ['localhost:8000']
+
+  - job_name: 'attack_simulator'
+    static_configs:
+      - targets: [ 'localhost:8000' ]
