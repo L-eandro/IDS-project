@@ -757,7 +757,7 @@
       "type": "piechart"
     }
   ],
-  "refresh": "auto",
+  "refresh": "5s",
   "schemaVersion": 39,
   "tags": [],
   "templating": {
@@ -771,6 +771,6 @@
   "timezone": "browser",
   "title": "IDS",
   "uid": "adwxu0zjwsagwc",
-  "version": 8,
+  "version": 1,
   "weekStart": ""
 }

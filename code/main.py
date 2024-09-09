@@ -7,7 +7,8 @@ from time_server import update_execution_time
 from monitor_network import monitor_network
 from monitor_ports import collect_port_data
 from intrusion_detect import simulate_intrusion_detection
-#from maps_attack import generate_random_attack
+from maps_attack import random_attack
+
 import time
 
 
@@ -19,25 +20,21 @@ def main():
         analyze_and_predict(historical_data)
 
     check_server()
-
     update_execution_time()
 
     monitor_network()
-
     collect_port_data()
 
     start_packet_sniffing()
-
     simulate_intrusion_detection()
-
-  #  generate_random_attack()
 
     while True:
         fetch_external_data()
         collect_port_data()
         monitor_network()
         simulate_intrusion_detection()
-     #   generate_random_attack()
+        random_attack()
+
         time.sleep(60)
 
 
