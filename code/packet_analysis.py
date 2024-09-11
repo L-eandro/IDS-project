@@ -17,5 +17,5 @@ def packet_callback(packet):
     except Exception as e:
         logger.error(f"Erro ao processar pacote: {e}")
 
-def start_packet_sniffing(interface='Wi-Fi 2'):
+def start_packet_sniffing(interface='Wi-Fi'):
     sniff(iface=interface, prn=packet_callback, store=0)
