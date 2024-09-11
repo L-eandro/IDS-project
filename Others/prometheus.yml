@@ -61,18 +61,22 @@ scrape_configs:
     static_configs:
       - targets: [ 'localhost:8000' ]
 
-  - job_name: 'intrusion_detection'
+  - job_name: 'network_intrusion_attempts'
     static_configs:
-      - targets: ['localhost:8000']
+      - targets: [ 'localhost:8000' ]
 
   - job_name: "python_application"
     static_configs:
-      - targets: ['localhost:8000']
+      - targets: [ 'localhost:8000' ]
 
   - job_name: 'attack_simulation'
     static_configs:
-      - targets: ['localhost:8000']
+      - targets: [ 'localhost:8000' ]
 
-  - job_name: 'attack_simulator'
+  - job_name: 'vulnerability_open_ports'
+    static_configs:
+      - targets: [ 'localhost:8001' ]
+
+  - job_name: 'attack_count'
     static_configs:
       - targets: [ 'localhost:8000' ]
