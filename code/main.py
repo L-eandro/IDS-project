@@ -14,10 +14,12 @@ from teste_nessus import update_prometheus_metrics
 import threading
 import time
 
+
 def start_attack_simulation():
     attack_thread = threading.Thread(target=simulate_attacks)
     attack_thread.daemon = True
     attack_thread.start()
+
 
 def run_background_tasks():
     while True:
@@ -27,31 +29,44 @@ def run_background_tasks():
         simulate_intrusion_detection()
         time.sleep(60)
 
+
 def run_nessus_analysis():
-    nessus_file_path = 'F:/Projeto-IDS/IDS-project/IDS-project/Others/Varredura.nessus'
+    nessus_file_path = 'E:/Git/IDS-project/Others/scan-teste_156pxn.nessus'
     while True:
         update_prometheus_metrics(nessus_file_path)
-        time.sleep(300)
+        time.sleep(10)
+
 
 def main():
+
     start_http_server(8000)
     print("Servidor Prometheus rodando na porta 8000...")
 
+
     start_attack_simulation()
+
+
     start_nmap_prometheus_server()
+
 
     historical_data = collect_historical_data()
     if not historical_data.empty:
         analyze_and_predict(historical_data)
 
+
     check_server()
+
+
     update_execution_time()
+
 
     monitor_network()
     collect_port_data()
 
+
     target = '192.168.18.1'
     scan_vulnerabilities(target)
+
 
     start_packet_sniffing()
     simulate_intrusion_detection()
@@ -60,6 +75,7 @@ def main():
     nessus_thread = threading.Thread(target=run_nessus_analysis)
     nessus_thread.daemon = True
     nessus_thread.start()
+
 
     run_background_tasks()
 

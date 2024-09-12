@@ -1,0 +1,56 @@
+from pynessus.nessus import NessusParser
+from prometheus_client import start_http_server, Gauge
+import time
+
+# Define as métricas no Prometheus
+vuln_low = Gauge('vulnerabilities_low', 'Number of low severity vulnerabilities')
+vuln_medium = Gauge('vulnerabilities_medium', 'Number of medium severity vulnerabilities')
+vuln_high = Gauge('vulnerabilities_high', 'Number of high severity vulnerabilities')
+vuln_critical = Gauge('vulnerabilities_critical', 'Number of critical severity vulnerabilities')
+
+
+# Função para atualizar métricas
+def update_metrics(vulnerabilities):
+    vuln_low.set(vulnerabilities['low'])
+    vuln_medium.set(vulnerabilities['medium'])
+    vuln_high.set(vulnerabilities['high'])
+    vuln_critical.set(vulnerabilities['critical'])
+
+
+# Função para processar o arquivo Nessus
+def process_nessus_file(file_path):
+    with open(file_path, 'r') as file:
+        parser = NessusParser.parse(file)
+
+    vulnerabilities = {
+        'low': 0,
+        'medium': 0,
+        'high': 0,
+        'critical': 0
+    }
+
+    for host in parser.hosts:
+        for vulnerability in host.get_vulnerabilities():
+            if vulnerability.severity == 'Low':
+                vulnerabilities['low'] += 1
+            elif vulnerability.severity == 'Medium':
+                vulnerabilities['medium'] += 1
+            elif vulnerability.severity == 'High':
+                vulnerabilities['high'] += 1
+            elif vulnerability.severity == 'Critical':
+                vulnerabilities['critical'] += 1
+
+    return vulnerabilities
+
+
+if __name__ == '__main__':
+    # Inicia o servidor Prometheus
+    start_http_server(8000)
+
+    # Processa o arquivo Nessus e atualiza métricas
+    file_path = 'E:/Git/IDS-project/Others/scan-teste_156pxn.nessus'
+    vulnerabilities = process_nessus_file(file_path)
+    update_metrics(vulnerabilities)
+
+    while True:
+        time.sleep(10)

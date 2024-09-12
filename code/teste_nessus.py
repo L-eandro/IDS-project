@@ -58,7 +58,7 @@ def main():
     print("Servidor Prometheus rodando na porta 8000...")
 
 
-    nessus_file_path = 'F:/Projeto-IDS/IDS-project/IDS-project/Others/Varredura.nessus'
+    nessus_file_path = 'E:/Git/IDS-project/Others/Varredura.nessus'
 
 
     while True:
