@@ -80,3 +80,19 @@ scrape_configs:
   - job_name: 'attack_count'
     static_configs:
       - targets: [ 'localhost:8000' ]
+  
+  - job_name: 'vulnerabilities_low'
+    static_configs:
+      - targets: [ 'localhost:8000' ]
+  
+  - job_name: 'vulnerabilities_medium'
+    static_configs:
+      - targets: [ 'localhost:8000' ]
+  
+  - job_name: 'vulnerabilities_high'
+    static_configs:
+      - targets: [ 'localhost:8000' ]
+  
+  - job_name: 'vulnerabilities_critical'
+    static_configs:
+      - targets: [ 'localhost:8000' ]
