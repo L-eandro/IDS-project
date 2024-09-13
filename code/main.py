@@ -37,47 +37,51 @@ def run_nessus_analysis():
         time.sleep(10)
 
 
-def main():
+def start_all_threads():
+    nessus_thread = threading.Thread(target=run_nessus_analysis)
+    nessus_thread.daemon = True
+    nessus_thread.start()
 
+    background_thread = threading.Thread(target=run_background_tasks)
+    background_thread.daemon = True
+    background_thread.start()
+
+    packet_sniffing_thread = threading.Thread(target=start_packet_sniffing)
+    packet_sniffing_thread.daemon = True
+    packet_sniffing_thread.start()
+
+
+def main():
     start_http_server(8000)
     print("Servidor Prometheus rodando na porta 8000...")
 
-
     start_attack_simulation()
 
-
     start_nmap_prometheus_server()
-
 
     historical_data = collect_historical_data()
     if not historical_data.empty:
         analyze_and_predict(historical_data)
 
-
     check_server()
 
-
     update_execution_time()
-
 
     monitor_network()
     collect_port_data()
 
-
     target = '192.168.18.1'
     scan_vulnerabilities(target)
 
+    start_all_threads()
 
-    start_packet_sniffing()
-    simulate_intrusion_detection()
+    while True:
+        time.sleep(8)
 
-
-    nessus_thread = threading.Thread(target=run_nessus_analysis)
-    nessus_thread.daemon = True
-    nessus_thread.start()
-
-
-    run_background_tasks()
 
 if __name__ == "__main__":
     main()
+try:
+    main()
+except KeyboardInterrupt:
+    print("Execução interrompida pelo usuário.")

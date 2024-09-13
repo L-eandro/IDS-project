@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-from prometheus_client import start_http_server, Gauge
+from prometheus_client import Gauge
 import time
 
 
@@ -9,12 +9,9 @@ high_vuln_gauge = Gauge('vulnerabilities_high', 'High severity vulnerabilities d
 critical_vuln_gauge = Gauge('vulnerabilities_critical', 'Critical severity vulnerabilities detected')
 
 
-
 def analyze_nessus_file(file_path):
-
     tree = ET.parse(file_path)
     root = tree.getroot()
-
 
     low_vulns = 0
     medium_vulns = 0
@@ -24,8 +21,6 @@ def analyze_nessus_file(file_path):
 
     for report in root.iter('ReportItem'):
         severity = int(report.get('severity'))
-
-
         if severity == 0:
             continue
         elif severity == 1:
@@ -37,34 +32,25 @@ def analyze_nessus_file(file_path):
         elif severity == 4:
             critical_vulns += 1
 
-
     return low_vulns, medium_vulns, high_vulns, critical_vulns
 
 
-
 def update_prometheus_metrics(file_path):
+
     low, medium, high, critical = analyze_nessus_file(file_path)
+
 
     low_vuln_gauge.set(low)
     medium_vuln_gauge.set(medium)
     high_vuln_gauge.set(high)
     critical_vuln_gauge.set(critical)
+
     print(f"Métricas atualizadas: Low={low}, Medium={medium}, High={high}, Critical={critical}")
 
 
-def main():
+def run_nessus_analysis():
 
-    start_http_server(8000)
-    print("Servidor Prometheus rodando na porta 8000...")
-
-
-    nessus_file_path = 'E:/Git/IDS-project/Others/Varredura.nessus'
-
-
+    nessus_file_path = 'E:/Git/IDS-project/Others/scan-teste_156pxn.nessus'
     while True:
         update_prometheus_metrics(nessus_file_path)
-        time.sleep(300)
-
-
-if __name__ == "__main__":
-    main()
+        time.sleep(10)
