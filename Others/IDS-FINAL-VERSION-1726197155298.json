@@ -141,25 +141,23 @@
                 },
                 "opacity": 0.4,
                 "rotation": {
-                  "field": "{__name__=\"attack_count\", country=\"Romania\", instance=\"localhost:8000\", ip=\"198.51.100.14\", job=\"attack_prediction_alert\"}",
                   "fixed": 0,
                   "max": 360,
                   "min": -360,
                   "mode": "mod"
                 },
                 "size": {
-                  "field": "{__name__=\"attack_count\", country=\"Romania\", instance=\"localhost:8000\", ip=\"198.51.100.14\", job=\"attack_prediction_alert\"}",
-                  "fixed": 15,
+                  "fixed": 10,
                   "max": 15,
-                  "min": 1
+                  "min": 2
                 },
                 "symbol": {
-                  "fixed": "img/icons/marker/circle.svg",
+                  "fixed": "img/icons/marker/cross.svg",
                   "mode": "fixed"
                 },
                 "symbolAlign": {
-                  "horizontal": "center",
-                  "vertical": "center"
+                  "horizontal": "left",
+                  "vertical": "top"
                 },
                 "textConfig": {
                   "fontSize": 12,
@@ -171,8 +169,8 @@
               }
             },
             "location": {
-              "latitude": "{__name__=\"attack_count\", country=\"Romania\", instance=\"localhost:8000\", ip=\"198.51.100.14\", job=\"attack_prediction_alert\"}",
-              "longitude": "{__name__=\"attack_count\", country=\"Romania\", instance=\"localhost:8000\", ip=\"198.51.100.14\", job=\"attack_prediction_alert\"}",
+              "latitude": "{__name__=\"attack_count\", country=\"Romania\", instance=\"localhost:8000\", ip=\"198.51.100.14\", job=\"attack_count\"}",
+              "longitude": "{__name__=\"attack_count\", country=\"Romania\", instance=\"localhost:8000\", ip=\"198.51.100.14\", job=\"attack_count\"}",
               "mode": "coords"
             },
             "name": "Layer 1",
@@ -200,9 +198,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "exemplar": false,
           "expr": "attack_count{instance=\"localhost:8000\"}",
-          "format": "heatmap",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -1180,7 +1176,7 @@
       "type": "table"
     }
   ],
-  "refresh": "5s",
+  "refresh": "auto",
   "schemaVersion": 39,
   "tags": [],
   "templating": {
@@ -1192,8 +1188,8 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "IDS2",
-  "uid": "adwxu0zjwsagwcsd",
-  "version": 3,
+  "title": "IDS-FINAL-VERSION",
+  "uid": "adwxu0zjwsagwcFV",
+  "version": 2,
   "weekStart": ""
 }

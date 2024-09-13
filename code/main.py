@@ -31,7 +31,7 @@ def run_background_tasks():
 
 
 def run_nessus_analysis():
-    nessus_file_path = 'E:/Git/IDS-project/Others/scan-teste_156pxn.nessus'
+    nessus_file_path = 'C:/Users/Aluno/Documents/IDS-project/Others/scan-teste_156pxn.nessus'
     while True:
         update_prometheus_metrics(nessus_file_path)
         time.sleep(10)
@@ -70,7 +70,7 @@ def main():
     monitor_network()
     collect_port_data()
 
-    target = '192.168.18.1'
+    target = '10.0.0.1'
     scan_vulnerabilities(target)
 
     start_all_threads()
